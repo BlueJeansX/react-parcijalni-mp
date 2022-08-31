@@ -4,13 +4,14 @@ import axios from "axios";
 import { Route, Routes } from "react-router-dom";
 import Footer from "./Footer";
 import Details from "./Details";
+import DetailsList from "./DetailsList";
+
 
 
 function Search() {
-
   const [searchInput, setSearchInput] = useState("");
   const [podaci, setPodaci] = useState("");
- 
+
 
   const handleChange = (e) => {
     setSearchInput(e.target.value)
@@ -47,21 +48,12 @@ function Search() {
               <button className="inline-block mt-2 bg-pink-500 hover:bg-pink-400 focus:bg-pink-700 px-6 py-2 rounded text-white shadow-lg">
                 GO
               </button>
-              <p className="mt-4 text-center text-xl text-white">
-              Podatci:
-            </p>
-
-              <div className="pt-5 text-white">
-                <img justify-center object-scale-down h-48 w-96  src={podaci?.avatar_url}/> 
-                <p className="pt-5">LOGIN: {podaci?.login}</p>
-                <p className="pt-5">NAME: {podaci?.name}</p>
-                <p className="pt-5">BIO: {podaci?.bio}</p>
-                <p className="pt-5">LOCATION: {podaci?.location}</p>
-              </div>
-
+              <Details podaci={podaci} />
+              <DetailsList podaci={podaci}/>
+              
             </div>
             <Footer />
-            <Details podaci={podaci}/>
+
           </div>
         </form>
       </main>
