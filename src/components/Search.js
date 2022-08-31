@@ -11,6 +11,7 @@ import DetailsList from "./DetailsList";
 function Search() {
   const [searchInput, setSearchInput] = useState("");
   const [podaci, setPodaci] = useState("");
+  const [repozitoriji, setRepozitoriji] = useState([]);
 
 
   const handleChange = (e) => {
@@ -23,6 +24,16 @@ function Search() {
     axios.get(`https://api.github.com/users/${searchInput}`).then((res) => {
       // console.log(res.data)
       setPodaci(res.data);
+      setSearchInput("");
+    })
+  };
+
+
+  const handleSearchRepos = (e) => {
+    e.preventDefault();
+    axios.get(`https://api.github.com/users/${searchInput}/repos`).then((res) => {
+      // console.log(res.data)
+      setRepozitoriji(res.data);
       setSearchInput("");
     })
   };
@@ -49,6 +60,9 @@ function Search() {
                 GO
               </button>
               <Details podaci={podaci} />
+              <button onClick={handleSearchRepos} className="inline-block mt-2 bg-pink-500 hover:bg-pink-400 focus:bg-pink-700 px-6 py-2 rounded text-white shadow-lg">
+                DOHVATI REPOS
+              </button>
               <DetailsList podaci={podaci}/>
               
             </div>
