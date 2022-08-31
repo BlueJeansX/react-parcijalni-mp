@@ -24,17 +24,17 @@ function Search() {
     axios.get(`https://api.github.com/users/${searchInput}`).then((res) => {
       // console.log(res.data)
       setPodaci(res.data);
-      setSearchInput("");
+     // setSearchInput("");
     })
   };
 
 
-  const handleSearchRepos = (e) => {
+  const handleSearchRepos =  (e) => {
     e.preventDefault();
     axios.get(`https://api.github.com/users/${searchInput}/repos`).then((res) => {
-      // console.log(res.data)
-      setRepozitoriji(res.data);
-      setSearchInput("");
+       console.log(res.data)
+       setRepozitoriji(res.data);
+     
     })
   };
 
