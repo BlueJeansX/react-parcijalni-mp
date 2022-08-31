@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import axios from "axios";
 
 import { Route, Routes } from "react-router-dom";
+import Footer from "./Footer";
+import Details from "./Details";
+
 
 function Search() {
 
   const [searchInput, setSearchInput] = useState("");
   const [podaci, setPodaci] = useState("");
+ 
 
   const handleChange = (e) => {
     setSearchInput(e.target.value)
@@ -18,6 +22,7 @@ function Search() {
     axios.get(`https://api.github.com/users/${searchInput}`).then((res) => {
       // console.log(res.data)
       setPodaci(res.data);
+      setSearchInput("");
     })
   };
 
@@ -38,30 +43,26 @@ function Search() {
                 placeholder="unesi pojam pretraživanja"
                 value={searchInput}
                 onChange={handleChange}
-
               />
-
               <button className="inline-block mt-2 bg-pink-500 hover:bg-pink-400 focus:bg-pink-700 px-6 py-2 rounded text-white shadow-lg">
                 GO
               </button>
+              <p className="mt-4 text-center text-xl text-white">
+              Podatci:
+            </p>
 
               <div className="pt-5 text-white">
-                <img src="{podaci?.avatar_url}" /> 
+                <img justify-center object-scale-down h-48 w-96  src={podaci?.avatar_url}/> 
                 <p className="pt-5">LOGIN: {podaci?.login}</p>
                 <p className="pt-5">NAME: {podaci?.name}</p>
                 <p className="pt-5">BIO: {podaci?.bio}</p>
                 <p className="pt-5">LOCATION: {podaci?.location}</p>
               </div>
 
-
-
             </div>
-            <p className="mt-4 text-center text-gray-400 text-xs">
-              ©2022 Parcijalni ispit
-            </p>
-
+            <Footer />
+            <Details podaci={podaci}/>
           </div>
-
         </form>
       </main>
 

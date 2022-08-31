@@ -1,17 +1,15 @@
 import React from "react";
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
 import Search from "./components/Search";
-
-import { Route, Routes } from "react-router-dom";
 
 function App() {
 
   return (
-
-     <>
-       <Routes>
-         <Route path="/" element={<Search />} />
-       </Routes>
-     </>
+    <>
+      <Navbar />
+      <Search />
+    </>
   )
 }
 
